@@ -1,16 +1,15 @@
-import { BaseDatabase } from "./BaseDatabase";
-import { User } from "../model/User";
+import { BaseDatabase } from './BaseDatabase';
+import { User } from '../model/User';
 
 export class UserDatabase extends BaseDatabase {
-
-  private static TABLE_NAME = "";
+  private static TABLE_NAME = 'RupMovies_Users';
 
   public async createUser(
     id: string,
     email: string,
     name: string,
     password: string,
-    role: string
+    favourite_genre: string
   ): Promise<void> {
     try {
       await this.getConnection()
@@ -19,7 +18,7 @@ export class UserDatabase extends BaseDatabase {
           email,
           name,
           password,
-          role
+          favourite_genre,
         })
         .into(UserDatabase.TABLE_NAME);
     } catch (error) {
@@ -29,11 +28,10 @@ export class UserDatabase extends BaseDatabase {
 
   public async getUserByEmail(email: string): Promise<User> {
     const result = await this.getConnection()
-      .select("*")
+      .select('*')
       .from(UserDatabase.TABLE_NAME)
       .where({ email });
 
     return User.toUserModel(result[0]);
   }
-
 }
