@@ -1,4 +1,5 @@
 import { Movie, MovieInputDTO } from '../model/Movie';
+import { Genre } from '../model/Genre';
 import { MovieDatabase } from '../data/MovieDatabase';
 import { IdGenerator } from '../services/IdGenerator';
 
@@ -12,13 +13,15 @@ export class MovieBusiness {
       !movie.synopsis ||
       !movie.trailer ||
       !movie.imdb_score ||
-      !movie.genre
+      !movie.genre ||
+      !movie.poster
     ) {
       throw new Error('Confira as informações do filme');
     }
     const movieDatabase = new MovieDatabase();
 
     const genre = Movie.stringToGenre(movie.genre);
+    console.log(genre);
 
     await movieDatabase.createMovie(
       id,
@@ -26,11 +29,12 @@ export class MovieBusiness {
       movie.synopsis,
       movie.trailer,
       genre,
-      movie.imdb_score
+      movie.imdb_score,
+      movie.poster
     );
   }
 
-  async deleteMovie(movieId: string) {
+  async deleteMovie(movieId: string): Promise<void> {
     const movieDatabase = new MovieDatabase();
     const previousMovie = movieDatabase.getMovieById(movieId);
 
@@ -61,7 +65,7 @@ export class MovieBusiness {
     const movie = movieDatabase.getMovieById(movieId);
 
     if (!movieId) {
-      throw new Error('Erro em id do filme a ser excluído   ');
+      throw new Error('Erro em id do filme a ser buscado ');
     }
 
     if (!movie) {
