@@ -51,15 +51,15 @@ export class User {
 
   static stringToGenre(input: string): Genre {
     switch (input) {
-      case 'ACTION':
+      case 'Ação':
         return Genre.ACTION;
-      case 'DRAMA':
+      case 'Drama':
         return Genre.DRAMA;
-      case 'COMEDY':
+      case 'Comédia':
         return Genre.COMEDY;
-      case 'HORROR':
+      case 'Terror':
         return Genre.HORROR;
-      case 'THRILLER':
+      case 'Suspense':
         return Genre.THRILLER;
       default:
         throw new Error('Invalid genre');

@@ -1,7 +1,7 @@
 export enum Genre {
-  ACTION = 'ACTION',
-  DRAMA = 'DRAMA',
-  COMEDY = 'COMEDY',
-  HORROR = 'HORROR',
-  THRILLER = 'THRILLER',
+  ACTION = 'Ação',
+  DRAMA = 'Drama',
+  COMEDY = 'Comédia',
+  HORROR = 'Terror',
+  THRILLER = 'Suspense',
 }
