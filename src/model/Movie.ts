@@ -7,7 +7,8 @@ export class Movie {
     private synopsis: string,
     private trailer: string,
     private imdb_score: string,
-    private genre: Genre
+    private genre: Genre,
+    private poster: string
   ) {}
 
   getId() {
@@ -34,6 +35,10 @@ export class Movie {
     return this.genre;
   }
 
+  getPoster() {
+    return this.poster;
+  }
+
   setId(id: string) {
     this.id = id;
   }
@@ -44,6 +49,10 @@ export class Movie {
 
   setSynopsis(synopsis: string) {
     this.synopsis = synopsis;
+  }
+
+  setPoster(poster: string) {
+    this.poster = poster;
   }
 
   setTrailer(trailer: string) {
@@ -82,7 +91,8 @@ export class Movie {
       movie.synopsis,
       movie.trailer,
       movie.imdb_score,
-      movie.stringToGenre(movie.genre)
+      Movie.stringToGenre(movie.genre),
+      movie.poster
     );
   }
 }
@@ -93,4 +103,5 @@ export interface MovieInputDTO {
   trailer: string;
   imdb_score: string;
   genre: string;
+  poster: string;
 }

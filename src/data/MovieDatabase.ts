@@ -4,7 +4,6 @@ import { Genre } from '../model/Genre';
 
 export class MovieDatabase extends BaseDatabase {
   private static TABLE_NAME = 'RupMovies_Movies';
-  private static MOVIE_TO_WATCH = 'RupMovies_MoviesToWatch';
 
   public async createMovie(
     id: string,
@@ -12,7 +11,8 @@ export class MovieDatabase extends BaseDatabase {
     synopsis: string,
     trailer: string,
     genre: Genre,
-    imdb_score: string
+    imdb_score: string,
+    poster: string
   ): Promise<void> {
     try {
       await this.getConnection()
@@ -23,6 +23,7 @@ export class MovieDatabase extends BaseDatabase {
           trailer,
           genre,
           imdb_score,
+          poster,
         })
         .into(MovieDatabase.TABLE_NAME);
     } catch (error) {
@@ -40,7 +41,10 @@ export class MovieDatabase extends BaseDatabase {
   }
 
   public async deleteMovie(id: string): Promise<void> {
-    await this.getConnection().del('*').where({ id });
+    await this.getConnection()
+      .del()
+      .where( id )
+      .from(MovieDatabase.TABLE_NAME);
   }
 
   public async getMovies(): Promise<any> {
@@ -55,6 +59,7 @@ export class MovieDatabase extends BaseDatabase {
       imdb_score: movie.imdb_score,
       trailer: movie.gernre,
       genre: movie.genre,
+      poster: movie.poster,
     }));
 
     return mappedMovies;
