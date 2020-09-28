@@ -7,7 +7,7 @@ export class Movie {
     private synopsis: string,
     private trailer: string,
     private imdb_score: string,
-    private favourite_genre: Genre
+    private genre: Genre
   ) {}
 
   getId() {
@@ -31,7 +31,7 @@ export class Movie {
   }
 
   getFavouriteGenre() {
-    return this.favourite_genre;
+    return this.genre;
   }
 
   setId(id: string) {
@@ -55,20 +55,20 @@ export class Movie {
   }
 
   setFavouriteGenre(genre: Genre) {
-    this.favourite_genre = genre;
+    this.genre = genre;
   }
 
   static stringToGenre(input: string): Genre {
     switch (input) {
-      case 'ACTION':
+      case 'Ação':
         return Genre.ACTION;
-      case 'DRAMA':
+      case 'Drama':
         return Genre.DRAMA;
-      case 'COMEDY':
+      case 'Comédia':
         return Genre.COMEDY;
-      case 'HORROR':
+      case 'Terror':
         return Genre.HORROR;
-      case 'THRILLER':
+      case 'Suspense':
         return Genre.THRILLER;
       default:
         throw new Error('Invalid genre');
@@ -82,7 +82,7 @@ export class Movie {
       movie.synopsis,
       movie.trailer,
       movie.imdb_score,
-      movie.stringToGenre(movie.favourite_genre)
+      movie.stringToGenre(movie.genre)
     );
   }
 }
@@ -92,5 +92,5 @@ export interface MovieInputDTO {
   synopsis: string;
   trailer: string;
   imdb_score: string;
-  favourite_genre: string;
+  genre: string;
 }
