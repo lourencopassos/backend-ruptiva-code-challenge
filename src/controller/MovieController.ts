@@ -80,11 +80,11 @@ export class MovieController {
         throw new Error('Unauthorized');
       }
 
-      const movieId = (req.params as any) 
+      const movieId = req.params as any;
 
       const movieBusiness = new MovieBusiness();
       const movie = await movieBusiness.getMovieDetail(movieId.id);
-      res.status(200).send({ movie: movie });
+      res.status(200).send({ movie });
     } catch (error) {
       res.status(400).send({ error: error.message });
     } finally {
